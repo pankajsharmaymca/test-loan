@@ -1,1 +1,174 @@
-asdlfjk
+package tree;
+
+public class Tree1 {
+
+	public static void main(String args[]) {
+		
+		
+	BinarySearchTree bs = new BinarySearchTree();
+	bs.insert(20);
+	bs.insert(21);
+	bs.insert(10);
+	bs.insert(11);
+	bs.insert(12);
+	bs.inorder();
+	
+	
+	System.out.println("----------------------");
+	bs.preorder();
+	System.out.println("----------------------");
+	bs.postoder();
+	Node node = bs.search(12);
+	
+	if ( node != null )
+	System.out.println(node.data + " found ");
+	else
+		System.out.println("not founmd");
+	}
+	
+	
+}
+
+class BinarySearchTree{
+	
+	public Node firstNode = null;
+	public Node node = null;		
+	
+	public void insert ( int data) {
+		insert( data , firstNode );
+	
+	}
+	public Node insert( int data , Node node) {
+	
+		if ( node == null) {
+			node = new Node();
+			node.data = data;
+			if ( firstNode == null )
+				firstNode = node;
+			
+			
+		}
+		if ( node.data > data ) {
+			node.leftNode = insert( data , node.leftNode);
+		}
+		if ( node.data < data) {
+			node.rightNode = insert( data , node.rightNode);
+		}
+		
+		
+		return node;
+	}
+	public boolean preorder() {
+		
+		preorder( firstNode);
+		return true;
+		
+	}
+	public void preorder( Node node) {
+		
+		if ( node == null)
+			return;
+		System.out.println( node.data);
+		preorder( node.leftNode);
+		preorder( node.rightNode);
+		
+	}
+	
+	
+	
+public boolean postoder() {
+		
+		postorder( firstNode);
+		return true;
+		
+	}
+	public void postorder( Node node) {
+		
+		if ( node == null)
+			return;
+		
+		postorder( node.leftNode);
+		postorder( node.rightNode);
+		System.out.println( node.data);
+		
+	}
+	
+	public boolean delete() {
+		
+		return false;
+	}
+	public void inorder() {
+		inorder(firstNode);
+}
+	public void inorder(Node node) {
+		
+
+				
+		if ( node == null)
+			return;
+		
+			inorder(node.leftNode);
+			System.out.println(node.data);
+			inorder( node.rightNode);
+		
+	}
+	public Node search ( int key ) {
+		
+		return search ( firstNode , key );
+	}
+	public Node search ( Node node , int key) {
+		
+		if ( node == null)
+			return null;
+		
+		if ( node.data == key )
+			return node;
+		
+		if ( key < node.data ) {
+			search ( node.leftNode , key );
+		}
+		if ( key > node.data) {
+			
+			search( node.rightNode , key );
+		}
+		return node;
+		
+	
+	}
+	
+	public Node inorderSuccessor(Node node ) {
+		
+		
+		if ( node.rightNode != null ) {
+			return minValue ( node.rightNode);
+		}
+		
+		
+		
+		
+		
+		
+	}
+	public Node minValue(Node node){
+		
+		while( node.leftNode != null ) {
+			node = node.leftNode;
+		}
+		return node;
+	}
+	public void delete( int key  ) {
+		
+		
+	}
+}
+
+class Node{
+	
+	public Node leftNode;
+	public int data;
+	public Node rightNode;
+	public Node parentNode;
+}
+
+
+
